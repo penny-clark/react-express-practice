@@ -5,9 +5,7 @@ const PORT = process.env.PORT || 3001;
 const app = express();
 
 app.get("/api", (req, res) => {
-  setTimeout(() => {
   res.json({ message: "Hello from server!" });
-  }, 3000);
 });
 
 app.listen(PORT, () => {
