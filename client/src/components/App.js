@@ -1,24 +1,38 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import './App.css';
 import Button from './Button.js';
 import Nav from './Nav.js';
 import TextBox from './TextBox.js'
 
 function App() {
-  const [data, setData] = useState(null);
+  const [message, setMessage] = useState(null);
   const [count, setCount] = useState(0);
+  const [email, setEmail] = useState("");
 
   useEffect(() => {
-    fetch("/api")
-      .then((res) => res.json())
-      .then((data) => setData(data.message));
+    axios.get("/api")
+      .then((res) => setMessage(res.data.message));
   }, []);
+
+  function joinMailList(email) {
+    console.log(email)
+    return axios
+     .post("/api/mailinglist", {
+      email: email
+    })
+    .then(res => {
+      console.log('Success:', res)
+      setEmail("")
+    })
+    .catch(error => console.error('Error:', error))
+  }
 
   return (
     <div className="App">
       <Nav>
         <p>
-          {!data ? "Loading..." : data}
+          {!message ? "Loading..." : message}
         </p>
       </Nav>
       <body className="App-main">
@@ -30,16 +44,15 @@ function App() {
         <Button className={"Button--nevermind"} onClick={() => setCount(count => count - 1)}>bye</Button>
         </TextBox>
         <TextBox className={"Text-Box--sidebar"}>
-          <form>
           <p>Sign up for our mailing list!</p>
             <fieldset>
               <label>
                 <p>Enter your email:</p>
-                <input name="email" />  
+                <input name="email" value={email} onChange={(event) => setEmail(event.target.value)}/>  
               </label>
             </fieldset>
-            <Button type="submit">Submit</Button>
-          </form>
+            <Button onClick={() => joinMailList(email)}>Join</Button>
+          
         </TextBox>
         {/* <a
           className="App-link"
