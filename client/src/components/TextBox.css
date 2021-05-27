@@ -1,0 +1,19 @@
+.Text-Box {
+  background-color: #282c34;
+  min-width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  color: white;
+  padding: 10px;
+  margin: 10px; 
+}
+
+.Text-Box--sidebar {
+  background-color: #828a9b;
+  min-width: 20%;
+  color: white;
+  padding: 10px;
+  margin: 10px; 
+}
