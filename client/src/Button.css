@@ -1,0 +1,21 @@
+.Button {
+  text-align: center;
+  max-width: 200px;
+  background-color: #6e7064;
+  color: white;
+  border: none;
+}
+
+.Button--ok { 
+  background-color: #7a9b06;
+  color: white;
+  border: none;
+  margin: 5px;
+}
+
+.Button--nevermind { 
+  background-color: #e48f11;
+  color: white;
+  border: none;
+  margin: 5px;
+}
