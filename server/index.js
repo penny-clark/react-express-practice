@@ -14,16 +14,14 @@ app.get("/api", (req, res) => {
   res.json({ message: "Hello from server!" });
 });
 
-app.post("/api/mailinglist", (req, res) => {
-  console.log(req.body, "Received email in server!")
-  const email = req.body.email
-  .then(email => {
-    res.json,({ email })
-  })
-  .catch(err => {
-  console.log(err, "no can do")
-  })
-})
+const gifURL=`https://api.giphy.com/v1/gifs/search?api_key=${GIPHY_API_KEY}=${gif}&limit=1&offset=0&rating=g&lang=en`
+  axios.get(gifURL)
+    .then((res) => {
+      console.log(res.data)
+      setCoolGif(res.data.data[0].url);
+      console.log('Success:', res.data.data[0].url)
+    })
+    .catch((err) => console.log(err))
 
 app.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);
